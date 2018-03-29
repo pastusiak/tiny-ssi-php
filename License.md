@@ -1,10 +1,16 @@
 
 The MIT License (MIT)
 
+Copyright (c) 2018 Przemyslaw Pastusiak
+<https://pastusiak.eu/>
+   
+
+Based on tiny-ssi
 Copyright (c) 2015 Alexey Vasilyev, Internet-Expert LLC
 <http://www.internet-expert.ru/>
 
-Based on tiny-ssi
+   
+
 Copyright (c) 2014 Maksim Lin
 <https://github.com/maks/tiny-ssi.git>
 

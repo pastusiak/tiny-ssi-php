@@ -1,7 +1,10 @@
 <?php
+namespace Pastusiak;
 
-namespace Alexxwiz;
-
+/**
+ * Class TinySSI
+ * @package Pastusiak
+ */
 class TinySSI {
 
     private $vars = [];
@@ -25,15 +28,22 @@ class TinySSI {
     public function parse($filename) {
         $filePath = dirname($filename).'/';
         $parsed = file_get_contents($filename);
-
-
+        
         $parsed = $this->saveVars($parsed);
 
-        /** #include **/
+        /** #include virtual **/
         $parsed = preg_replace_callback('|<!--#include virtual="(.*?)" -->|', function ($matches) use ($filePath) {
             $output = $this->parse($filePath.$matches[1]);
             $output = $this->saveVars($output);
 
+            return $output;
+        }, $parsed);
+    
+        /** #include file **/
+        $parsed = preg_replace_callback('|<!--#include file="(.*?)" -->|', function ($matches) use ($filePath) {
+            $output = $this->parse($filePath.$matches[1]);
+            $output = $this->saveVars($output);
+        
             return $output;
         }, $parsed);
 
@@ -44,6 +54,5 @@ class TinySSI {
 
         return $parsed;
     }
-
 }
 

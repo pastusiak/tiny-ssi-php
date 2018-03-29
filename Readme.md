@@ -1,34 +1,41 @@
-# tiny-ssi
+# tiny-ssi-php
 
-A minimal implementation of Apache SSI (server-side includes) for PHP 5.4+
+A minimal implementation of Apache SSI (server-side includes) for >= PHP 5.6
 
 
 ## Usage
 
-Currently only supports doing includes, set var and echo var.
+Supports:
+- include file
+- include virtual
+- set var
+- echo var
 
 ```html
 
- <!--#include virtual="header.html" -->
+<!--#include virtual="ssi_test_header.html" -->
 
-    <div class="container">
-        <h1>title</h1>
-        <p class="lead">
-          contents
-        </p>
-    </div>
- <!--#include virtual="footer.html" -->
+<!--#set var="title" value="My Title" -->
+
+<div class="container">
+    <h1><!--#echo var="title" --></h1>
+    <p class="lead">
+        contents
+    </p>
+</div>
+
+<!--#include file="ssi_test_footer.html" -->
 
 ```
 
-expecting that 'header.html' and 'footer.html' are in the same folder as the above html file,
+expecting that 'ssi_test_header.html' and 'ssi_test_footer.html' are in the same folder as the above html file,
 you can then do:
 
 ```php
-require_once('tiny_ssi.php');
 
-$parser = new TinySSI;
-echo $parser->parse('/test/ssi_test_body.html');
+$parser = new Pastusiak\TinySSI();
+$combined = $parser->parse('ssi_test_body.html');
+
 ```
 
 ## License
